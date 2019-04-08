@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.docx4j</groupId>
   <artifactId>docx4j-OSGi-HelloWorld</artifactId>
-  <version>6.1.3-SNAPSHOT</version>
+  <version>8.0.0-SNAPSHOT</version>
   
   <packaging>bundle</packaging>
 
@@ -36,6 +36,7 @@
 						<Embed-Dependency>
 							*;scope=compile|runtime;inline=false
 						</Embed-Dependency>
+                        <_noee>true</_noee>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -54,8 +55,23 @@
 
 		<dependency>
 			<groupId>org.docx4j</groupId>
-			<artifactId>docx4j-OSGi</artifactId>
-			<version>6.1.3-SNAPSHOT</version>
+			<artifactId>docx4j-core</artifactId>
+			<version>8.0.0-SNAPSHOT</version>
 		</dependency>
+        
+        <!-- specify the JAXB implementation you want to use here.  For ServiceMix 7.0.1, use docx4j-JAXB-ReferenceImpl -->
+        <!--
+		<dependency>
+            <groupId>org.docx4j</groupId>
+			<artifactId>docx4j-JAXB-Internal</artifactId>
+			<version>8.0.0-SNAPSHOT</version>
+		</dependency>
+        -->
+		<dependency>
+            <groupId>org.docx4j</groupId>
+			<artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
+			<version>8.0.0-SNAPSHOT</version>
+		</dependency>
+        
 	</dependencies>
 </project>
