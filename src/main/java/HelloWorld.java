@@ -13,8 +13,11 @@ public class HelloWorld implements BundleActivator {
         try {
 	        P p = Context.getWmlObjectFactory().createP();
 	        System.out.println("NamespacePrefixMapper: " + NamespacePrefixMapperUtils.getPrefixMapper().getClass().getName());
-	        System.out.println(XmlUtils.marshaltoString(p));
-	        System.out.println("it worked.");
+	        String str = XmlUtils.marshaltoString(p);
+	        System.out.println(str);
+	        System.out.println("Marshalling worked.");
+	        Object o = XmlUtils.unmarshalString(str);
+	        System.out.println(o.getClass().getName());
         } catch (Throwable e) {
         	e.printStackTrace();
         }

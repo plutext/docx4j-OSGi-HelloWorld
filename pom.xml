@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.docx4j</groupId>
   <artifactId>docx4j-OSGi-HelloWorld</artifactId>
-  <version>8.0.0-SNAPSHOT</version>
+  <version>8.2.1</version>
   
   <packaging>bundle</packaging>
 
@@ -26,16 +26,19 @@
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>
-							${pom.groupId}.${pom.artifactId}
+							${project.groupId}.${project.artifactId}
 						</Bundle-SymbolicName>
-						<Bundle-Name>${pom.name}</Bundle-Name>
-						<Bundle-Version>${pom.version}</Bundle-Version>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-Activator>
 							HelloWorld
 						</Bundle-Activator>
 						<Embed-Dependency>
 							*;scope=compile|runtime;inline=false
 						</Embed-Dependency>
+                        <!-- Don't do this; it seems to have karaf uncover various deps that mvn dependency:tree doesn't and which we don't have!
+                        <Embed-Transitive>true</Embed-Transitive>
+                        -->
                         <_noee>true</_noee>
 					</instructions>
 				</configuration>
@@ -45,10 +48,17 @@
 	</build>
 
 	<dependencies>
+	
+		<!--  ServiceMix 7.0.1 can use 6.0.,
+		
+			  ServiceMix 5.4.1 must downgrade to eg 4.0.0 to avoid 
+			  exposed to package 'org.osgi.framework' 
+			  via two dependency chains
+		 -->
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>6.0.0</version>
+			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -56,22 +66,24 @@
 		<dependency>
 			<groupId>org.docx4j</groupId>
 			<artifactId>docx4j-core</artifactId>
-			<version>8.0.0-SNAPSHOT</version>
+			<version>8.2.1</version>
 		</dependency>
         
         <!-- specify the JAXB implementation you want to use here.  For ServiceMix 7.0.1, use docx4j-JAXB-ReferenceImpl -->
-        <!--
 		<dependency>
             <groupId>org.docx4j</groupId>
 			<artifactId>docx4j-JAXB-Internal</artifactId>
-			<version>8.0.0-SNAPSHOT</version>
+			<version>8.2.1</version>
 		</dependency>
-        -->
+
+        <!--
 		<dependency>
             <groupId>org.docx4j</groupId>
 			<artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
+			<artifactId>docx4j-JAXB-MOXy</artifactId>
 			<version>8.0.0-SNAPSHOT</version>
 		</dependency>
+        -->
         
 	</dependencies>
 </project>
